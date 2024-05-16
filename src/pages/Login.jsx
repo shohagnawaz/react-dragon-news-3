@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../shared/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProviders";
 
 const Login = () => {
     const {logInUser} = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleLogin = e => {
         e.preventDefault()
@@ -16,6 +17,8 @@ const Login = () => {
         logInUser(email, password)
         .then(result => {
             console.log(result.user)
+            // navigate
+            navigate(location?.state ? location.state : "/" );
         })
         .catch(error => {
             console.error(error)
